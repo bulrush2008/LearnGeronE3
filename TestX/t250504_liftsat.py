@@ -19,14 +19,19 @@ np.random.seed(42)
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
+
+# 线性模型
 from sklearn.linear_model import LinearRegression
+
+# 或者，选择k近邻模型
+from sklearn.neighbors import KNeighborsRegressor
 
 # Download and prepare the data
 data_root = "https://github.com/ageron/data/raw/main/"
 lifesat = pd.read_csv(data_root + "lifesat/lifesat.csv")  # data with DataFrame format
 
 # 共 27 个国家，27 组数据
-print(lifesat)  # Display the first few rows of the DataFrame
+#print(lifesat)  # Display the first few rows of the DataFrame
 
 X = lifesat[["GDP per capita (USD)"]].values; # 输出 numpy 数组格式
 y = lifesat[["Life satisfaction"]].values
@@ -38,12 +43,15 @@ y = lifesat[["Life satisfaction"]].values
 lifesat.plot(kind='scatter', grid=True,
              x="GDP per capita (USD)", y="Life satisfaction")
 plt.axis([23_500, 62_500, 4, 9])  # 23_500 = 23500, for easier reading
-plt.show()
+#plt.show()
 
 # Select a linear model
 # 模型选择包括制定模型，以及模型的结构
 # 这里选择回归模型，再选择线性回归模型，递进关系
-model = LinearRegression()
+#model = LinearRegression()
+
+# 选择k近邻模型，k=3
+model = sklearn.neighbors.KNeighborsRegressor(n_neighbors=3)
 
 # Train the model
 model.fit(X, y)
